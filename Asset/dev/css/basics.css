@@ -131,11 +131,11 @@ body {
 }
 /* The bright Trello blue reads fine in light mode but is glaring next to
    the dark greyscale surfaces everywhere else once dark is active --
-   darken it to a deep navy that keeps the brand identity without
-   fighting the rest of the dark palette. */
+   swap it for the same dark grey surface used everywhere else in this
+   scheme instead of inventing a separate accent color. */
 @media (prefers-color-scheme: dark) {
 	body {
-		background-color: #0a3d62;
+		background-color: var(--color-greyscale-4);
 	}
 }
 body.TR a {
