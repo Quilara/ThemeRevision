@@ -330,6 +330,7 @@ body.TR .task-board-category span.tooltip i.fa, body.TR .table-list-category spa
    color is picked for it. Background uses Kanboard's own pastel
    --color-task-X-bg (built for exactly this: a light full-surface
    tint, unlike the solid pill accent below). */
+.task-board:not(:has(.task-board-category)) { background: var(--color-task-yellow-bg); border-left: 4px solid #c9a227; }
 .task-board:has(.task-board-category.color-yellow) { background: var(--color-task-yellow-bg); border-left: 4px solid #c9a227; }
 .task-board:has(.task-board-category.color-blue) { background: var(--color-task-blue-bg); border-left: 4px solid #1e88e5; }
 .task-board:has(.task-board-category.color-green) { background: var(--color-task-green-bg); border-left: 4px solid #43a047; }
