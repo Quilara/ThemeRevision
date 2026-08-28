@@ -169,7 +169,7 @@ body.TR .task-board-title a, body.TR .table-list-title a {
 }
 .task-board-category, .task-tags li, .table-list-category, .task-list-tag {
     border: none;
-	border-bottom: calc(1rem + 6px) solid var(--color-greyscale-2);
+	border-bottom: calc(1rem + 6px) solid #6b7280;
     border-radius: var(--size-radius-def);
 	height: 0;
     line-height: calc(1rem + 6px);
@@ -192,28 +192,35 @@ body.TR .task-board-title a, body.TR .table-list-title a {
 	margin-bottom: 0 !important;
 }
 /* Bug: the base rule above sets `background: none !important` and paints
-   the pill shape entirely via border-bottom, hardcoded to
-   var(--color-greyscale-2) — every category/tag pill rendered flat grey
-   regardless of its own color (native Kanboard .color-X rules only set
-   background-color/border-color, which the !important above wipes out).
-   Recolor the same border-bottom per Kanboard's own color classes so a
-   category/tag's actual color shows again. */
-.task-board-category.color-yellow, .task-tags li.color-yellow, .table-list-category.color-yellow, .task-list-tag.color-yellow { border-bottom-color: var(--color-task-yellow-bg); }
-.task-board-category.color-blue, .task-tags li.color-blue, .table-list-category.color-blue, .task-list-tag.color-blue { border-bottom-color: var(--color-task-blue-bg); }
-.task-board-category.color-green, .task-tags li.color-green, .table-list-category.color-green, .task-list-tag.color-green { border-bottom-color: var(--color-task-green-bg); }
-.task-board-category.color-purple, .task-tags li.color-purple, .table-list-category.color-purple, .task-list-tag.color-purple { border-bottom-color: var(--color-task-purple-bg); }
-.task-board-category.color-red, .task-tags li.color-red, .table-list-category.color-red, .task-list-tag.color-red { border-bottom-color: var(--color-task-red-bg); }
-.task-board-category.color-orange, .task-tags li.color-orange, .table-list-category.color-orange, .task-list-tag.color-orange { border-bottom-color: var(--color-task-orange-bg); }
-.task-board-category.color-grey, .task-tags li.color-grey, .table-list-category.color-grey, .task-list-tag.color-grey { border-bottom-color: var(--color-task-grey-bg); }
-.task-board-category.color-brown, .task-tags li.color-brown, .table-list-category.color-brown, .task-list-tag.color-brown { border-bottom-color: var(--color-task-brown-bg); }
-.task-board-category.color-deep_orange, .task-tags li.color-deep_orange, .table-list-category.color-deep_orange, .task-list-tag.color-deep_orange { border-bottom-color: var(--color-task-deep-orange-bg); }
-.task-board-category.color-dark_grey, .task-tags li.color-dark_grey, .table-list-category.color-dark_grey, .task-list-tag.color-dark_grey { border-bottom-color: var(--color-task-dark-grey-bg); }
-.task-board-category.color-pink, .task-tags li.color-pink, .table-list-category.color-pink, .task-list-tag.color-pink { border-bottom-color: var(--color-task-pink-bg); }
-.task-board-category.color-teal, .task-tags li.color-teal, .table-list-category.color-teal, .task-list-tag.color-teal { border-bottom-color: var(--color-task-teal-bg); }
-.task-board-category.color-cyan, .task-tags li.color-cyan, .table-list-category.color-cyan, .task-list-tag.color-cyan { border-bottom-color: var(--color-task-cyan-bg); }
-.task-board-category.color-lime, .task-tags li.color-lime, .table-list-category.color-lime, .task-list-tag.color-lime { border-bottom-color: var(--color-task-lime-bg); }
-.task-board-category.color-light_green, .task-tags li.color-light_green, .table-list-category.color-light_green, .task-list-tag.color-light_green { border-bottom-color: var(--color-task-light-green-bg); }
-.task-board-category.color-amber, .task-tags li.color-amber, .table-list-category.color-amber, .task-list-tag.color-amber { border-bottom-color: var(--color-task-amber-bg); }
+   the pill shape entirely via border-bottom. Two problems fixed here:
+   1. It was hardcoded to var(--color-greyscale-2) for every pill, so a
+      category's/tag's own color never showed (native Kanboard .color-X
+      rules only set background-color/border-color, wiped out by the
+      !important above). Recolor border-bottom per color class.
+   2. Kanboard's own --color-task-X-bg vars are pale pastel tints, meant
+      to pair with dark text — but this pill design forces white text
+      (see `color: var(--color-greyscale-6)` above). Pastel + white text
+      is close to unreadable, so these use a hand-picked solid/saturated
+      palette instead of the native pastel vars. Plain tags with no
+      color at all (area:/type: labels never get a .color-X class in
+      this install) fall through to the base rule's #6b7280 — previously
+      a near-transparent border that was invisible against white. */
+.task-board-category.color-yellow, .task-tags li.color-yellow, .table-list-category.color-yellow, .task-list-tag.color-yellow { border-bottom-color: #c9a227; }
+.task-board-category.color-blue, .task-tags li.color-blue, .table-list-category.color-blue, .task-list-tag.color-blue { border-bottom-color: #1e88e5; }
+.task-board-category.color-green, .task-tags li.color-green, .table-list-category.color-green, .task-list-tag.color-green { border-bottom-color: #43a047; }
+.task-board-category.color-purple, .task-tags li.color-purple, .table-list-category.color-purple, .task-list-tag.color-purple { border-bottom-color: #8e24aa; }
+.task-board-category.color-red, .task-tags li.color-red, .table-list-category.color-red, .task-list-tag.color-red { border-bottom-color: #e53935; }
+.task-board-category.color-orange, .task-tags li.color-orange, .table-list-category.color-orange, .task-list-tag.color-orange { border-bottom-color: #fb8c00; }
+.task-board-category.color-grey, .task-tags li.color-grey, .table-list-category.color-grey, .task-list-tag.color-grey { border-bottom-color: #78909c; }
+.task-board-category.color-brown, .task-tags li.color-brown, .table-list-category.color-brown, .task-list-tag.color-brown { border-bottom-color: #6d4c41; }
+.task-board-category.color-deep_orange, .task-tags li.color-deep_orange, .table-list-category.color-deep_orange, .task-list-tag.color-deep_orange { border-bottom-color: #f4511e; }
+.task-board-category.color-dark_grey, .task-tags li.color-dark_grey, .table-list-category.color-dark_grey, .task-list-tag.color-dark_grey { border-bottom-color: #616161; }
+.task-board-category.color-pink, .task-tags li.color-pink, .table-list-category.color-pink, .task-list-tag.color-pink { border-bottom-color: #ec407a; }
+.task-board-category.color-teal, .task-tags li.color-teal, .table-list-category.color-teal, .task-list-tag.color-teal { border-bottom-color: #00897b; }
+.task-board-category.color-cyan, .task-tags li.color-cyan, .table-list-category.color-cyan, .task-list-tag.color-cyan { border-bottom-color: #00acc1; }
+.task-board-category.color-lime, .task-tags li.color-lime, .table-list-category.color-lime, .task-list-tag.color-lime { border-bottom-color: #7cb342; }
+.task-board-category.color-light_green, .task-tags li.color-light_green, .table-list-category.color-light_green, .task-list-tag.color-light_green { border-bottom-color: #66bb6a; }
+.task-board-category.color-amber, .task-tags li.color-amber, .table-list-category.color-amber, .task-list-tag.color-amber { border-bottom-color: #d19a00; }
 .task-board-category:hover, .task-tags li:hover, .table-list-category:hover, .task-list-tag:hover{
 	opacity: 1;
 }

@@ -44,8 +44,12 @@ input[required]:not(:hover), select[required]:not(:hover), textarea[required]:no
 input[type=checkbox], input[type=radio] {
 	margin: 0 0.25rem 1rem 0;
 }
+/* Bug: --color-greyscale-2 is rgba(5,12,77,.15) — a 15%-opacity navy tint,
+   effectively invisible as placeholder text on a white field (e.g. the
+   dashboard's "Search" box). Match the readable value already used for
+   the select-dropdown placeholder below instead. */
 input::placeholder, textarea::placeholder{
-	color: var(--color-greyscale-2) !important;
+	color: #4b5563 !important;
 }
 .task-form-main-column input[type="text"] {
 	width: unset;
