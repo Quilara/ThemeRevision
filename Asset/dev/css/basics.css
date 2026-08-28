@@ -86,7 +86,7 @@ body {
 	font-size: var(--size-font-def);
 }
 body {
-	background-color: var(--color-greyscale-4);
+	background-color: #0079bf;
 	padding: .5rem 2rem;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

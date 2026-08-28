@@ -160,3 +160,88 @@ table th:first-child .board-add-icon .fa-plus:before {
 table th:first-child .board-add-icon:hover .fa-plus:before {
     color: var(--color-brand-secd);
 }
+
+/* Trello-style separated list cards: gap between columns shows the
+   board background, each column looks like one rounded surface even
+   though header (th) and body (td) are separate table cells. */
+#board {
+	border-collapse: separate;
+	border-spacing: 1.25rem 0;
+}
+#board th.board-column-header {
+	border-radius: var(--size-radius-def) var(--size-radius-def) 0 0;
+}
+#board td[class*="board-column-"] {
+	border-radius: 0 0 var(--size-radius-def) var(--size-radius-def);
+	vertical-align: top;
+}
+#board td:first-child, #board th:first-child {
+	padding-left: .75rem;
+}
+#board td:last-child, #board th:last-child {
+	padding-right: .75rem;
+}
+
+/* Column header like a Trello list header: plain bold title on the
+   left, no button/box — just the text and the existing icons. */
+.board-column-title > .dropdown > a.dropdown-menu {
+	font-weight: bold !important;
+	font-size: 1.125rem;
+	color: var(--color-greyscale-1) !important;
+}
+.board-column-title > .dropdown > a.dropdown-menu i.fa-caret-down {
+	color: var(--color-greyscale-2);
+	margin-left: .35rem;
+}
+
+/* Bug: the "+" (add task) icon's background matched the column's own
+   background exactly (both var(--color-greyscale-4)) on every column
+   except the first, which had a special-cased visible color — so it
+   was only ever visible on column 1, invisible everywhere else until
+   hovered. Give it a real background on every column. */
+.board-add-icon .fa-plus:before {
+	background: var(--color-brand-prim);
+	color: var(--color-brand-cont);
+	box-shadow: var(--style-shadow-light);
+}
+.board-add-icon:hover .fa-plus:before {
+	color: var(--color-brand-secd);
+}
+
+/* Enclose the header as its own bar: white, separated from the column
+   body by a border + a bit of relief (subtle shadow), independent of
+   the column body's background. */
+#board th.board-column-header {
+	background: var(--color-greyscale-6);
+	border-bottom: 1px solid var(--color-greyscale-3);
+	box-shadow: var(--style-shadow-light);
+	padding-top: 1.4rem !important;
+	padding-bottom: .8rem !important;
+	padding-left: .75rem !important;
+	padding-right: .75rem !important;
+}
+.board-column-expanded-header {
+	display: flex;
+	align-items: center;
+}
+.board-column-expanded-header .board-add-icon {
+	display: flex;
+	align-items: center;
+}
+.board-column-expanded-header .board-column-title {
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+/* The sort-icon dropdown is nested INSIDE the title's own <span
+   class="dropdown"> (sibling of the title link's <ul> menu), not a
+   sibling of .board-column-title — space-between has to go one level
+   deeper, on that wrapper, to actually push it to the right edge. */
+.board-column-title > .dropdown {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex: 1;
+	width: 100%;
+}
+

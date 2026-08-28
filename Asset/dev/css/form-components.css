@@ -220,7 +220,7 @@ input::placeholder, textarea::placeholder{
 	min-width: var(--size-width-comp);
 	border-bottom: var(--style-border);
 	border-radius: var(--size-radius-def);
-	background-color: var(--color-greyscale-4);
+	background-color: var(--color-greyscale-6);
 }
 .select-dropdown-input-container input.select-dropdown-input {
     width: 90%;
@@ -230,6 +230,11 @@ input::placeholder, textarea::placeholder{
 	padding: 0.5rem;
 	background: none;
 	box-shadow: none;
+	color: var(--color-greyscale-1);
+}
+.select-dropdown-input-container input.select-dropdown-input::placeholder {
+	color: #4b5563 !important;
+	opacity: 1;
 }
 .select-dropdown-input-container .select-dropdown-chevron{
 	top: .5em;

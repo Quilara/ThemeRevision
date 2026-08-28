@@ -40,8 +40,18 @@
 	width: 100%;
 	line-height: 3rem;
 }
+/* Sidebar sits directly on the page's blue background now; an inactive
+   link needs light text to read there, but the same text turns
+   invisible once hover/active flips the row to a white pill — so hover
+   and active both force it back to dark. */
+.sidebar>ul li a {
+	color: #fff;
+}
 .sidebar>ul li.active a{
 	font-weight: bold;
+}
+.sidebar>ul li.active a, .sidebar>ul li:hover a {
+	color: var(--color-greyscale-1);
 }
 .sidebar>ul li.active a:focus, .sidebar>ul li.active a:hover{
 	color: var(--color-greyscale-1);
