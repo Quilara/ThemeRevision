@@ -8,7 +8,12 @@ header {
 }
 @media (prefers-color-scheme: dark) {
 	header {
-		background: var(--color-greyscale-4);
+		/* Must stay darker than the column surface color (also
+		   --color-greyscale-4, via board-task-list.css's box-shadow) --
+		   see the matching comment in basics.css body{}. Same header/
+		   board-container/body value everywhere, mirroring light
+		   scheme's single flat #0079bf across all three. */
+		background: #131217;
 	}
 }
 header a, header h1, header .notification i.fa, header i.fa {
@@ -51,7 +56,12 @@ header .tooltip i.fa {
 }
 @media (prefers-color-scheme: dark) {
 	#board-container {
-		background: var(--color-greyscale-4);
+		/* Must stay darker than the column surface color (also
+		   --color-greyscale-4, via board-task-list.css's box-shadow) --
+		   see the matching comment in basics.css body{}. Same header/
+		   board-container/body value everywhere, mirroring light
+		   scheme's single flat #0079bf across all three. */
+		background: #131217;
 	}
 }
 .sidebar-container{

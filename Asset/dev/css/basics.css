@@ -109,6 +109,17 @@
    that reads the same palette token is affected. */
 @media (prefers-color-scheme: dark) {
 	:root {
+		/* Bug: --link-color-hover reuses --color-brand-prim (#3860f4), the
+		   SAME saturated blue in both palettes -- fine as a link color on
+		   a plain white/grey-4 surface, but hovering a task title now
+		   means "bright blue text on top of whatever category color that
+		   card is tinted" (amber, red, purple...), which reads as a
+		   completely different color scheme bleeding through rather than
+		   a hover state. Use a neutral near-white instead, consistent
+		   with the rest of dark scheme's text treatment. brand-prim
+		   itself stays untouched -- primary buttons should keep the
+		   brand blue. */
+		--link-color-hover: #fff;
 		--alert-background-color-info: #1a2550;
 		/* Same bug, same fix, for the default/"reminder" alert (e.g. the
 		   "There is no global tag" notice): --color-reminder-cont's dark
@@ -136,11 +147,19 @@ body {
 }
 /* The bright Trello blue reads fine in light mode but is glaring next to
    the dark greyscale surfaces everywhere else once dark is active --
-   swap it for the same dark grey surface used everywhere else in this
-   scheme instead of inventing a separate accent color. */
+   swap it for a dark grey instead of inventing a separate accent color.
+   Bug found afterwards: using --color-greyscale-4 here made the page
+   background IDENTICAL to the column surface color (board-task-list.css
+   paints each column via box-shadow: inset ... var(--color-greyscale-4))
+   -- in light scheme the page (bright blue) and column (near-white
+   greyscale-4, #f0f3f7) are worlds apart in lightness, so columns read
+   as distinct raised surfaces; matching them in dark made columns
+   disappear into the page. Use a darker, dedicated shade instead of a
+   shared token, restoring the same "page darker than column" relationship
+   light scheme already has. */
 @media (prefers-color-scheme: dark) {
 	body {
-		background-color: var(--color-greyscale-4);
+		background-color: #131217;
 	}
 }
 body.TR a {

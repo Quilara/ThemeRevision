@@ -104,6 +104,28 @@
 	text-shadow: 1px 2px 6px var(--color-greyscale-2);
     font-size: var(--size-font-min);
 }
+/* The "recent" dot was a fixed brand-blue regardless of the card's own
+   category color -- every card showed the same blue dot even though its
+   background/left-border already follow the category palette (see the
+   .task-board:has(...) block below). Match it to the same palette,
+   including the no-category default, instead of a fixed accent. */
+.task-board.task-board-recent:not(:has(.task-board-category)) .task-board-header:before { color: #c9a227; }
+.task-board.task-board-recent:has(.task-board-category.color-yellow) .task-board-header:before { color: #c9a227; }
+.task-board.task-board-recent:has(.task-board-category.color-blue) .task-board-header:before { color: #1e88e5; }
+.task-board.task-board-recent:has(.task-board-category.color-green) .task-board-header:before { color: #43a047; }
+.task-board.task-board-recent:has(.task-board-category.color-purple) .task-board-header:before { color: #8e24aa; }
+.task-board.task-board-recent:has(.task-board-category.color-red) .task-board-header:before { color: #e53935; }
+.task-board.task-board-recent:has(.task-board-category.color-orange) .task-board-header:before { color: #fb8c00; }
+.task-board.task-board-recent:has(.task-board-category.color-grey) .task-board-header:before { color: #78909c; }
+.task-board.task-board-recent:has(.task-board-category.color-brown) .task-board-header:before { color: #6d4c41; }
+.task-board.task-board-recent:has(.task-board-category.color-deep_orange) .task-board-header:before { color: #f4511e; }
+.task-board.task-board-recent:has(.task-board-category.color-dark_grey) .task-board-header:before { color: #616161; }
+.task-board.task-board-recent:has(.task-board-category.color-pink) .task-board-header:before { color: #ec407a; }
+.task-board.task-board-recent:has(.task-board-category.color-teal) .task-board-header:before { color: #00897b; }
+.task-board.task-board-recent:has(.task-board-category.color-cyan) .task-board-header:before { color: #00acc1; }
+.task-board.task-board-recent:has(.task-board-category.color-lime) .task-board-header:before { color: #7cb342; }
+.task-board.task-board-recent:has(.task-board-category.color-light_green) .task-board-header:before { color: #66bb6a; }
+.task-board.task-board-recent:has(.task-board-category.color-amber) .task-board-header:before { color: #d19a00; }
 
 /* header */
 .task-board-header {
@@ -324,6 +346,25 @@ body.TR .task-board-category span.tooltip i.fa, body.TR .table-list-category spa
 .task-board-icons .task-board-icons-row .task-date-overdue, .task-list-icons .task-date-overdue,
 .task-board-icons .task-board-icons-row .task-date-overdue i.fa, .task-list-icons .task-date-overdue i.fa {
 	color: var(--color-warning-prim) !important;
+}
+/* Bug: the whole footer row (date, comment/description/links counts,
+   priority) shares one color: var(--color-greyscale-1) rule -- same
+   marginal-contrast problem the card title had against several of the
+   now-dark category tints (yellow/grey/lime/pink), just never reported
+   per-icon. And the overdue date's fixed warning-prim red is a strong
+   clash specifically on the red and purple tints (epic cards, red-
+   category cards) -- a same-hue-family color sitting on a similar-hue
+   background reads as broken, not as a warning. Make the whole row
+   white in dark scheme, overdue date included, instead of keeping a
+   per-tint-dependent semantic color that can't stay legible everywhere. */
+@media (prefers-color-scheme: dark) {
+	.task-board-icons .task-board-icons-row *, .task-list-icons * {
+		color: #fff !important;
+	}
+	.task-board-icons .task-board-icons-row .task-date-overdue, .task-list-icons .task-date-overdue,
+	.task-board-icons .task-board-icons-row .task-date-overdue i.fa, .task-list-icons .task-date-overdue i.fa {
+		color: #fff !important;
+	}
 }
 .task-board-icons .task-board-icons-row .task-icon-age,
 .task-list-icons .task-icon-age{
