@@ -321,11 +321,28 @@ body.TR .task-board-category span.tooltip i.fa, body.TR .table-list-category spa
 	margin: 0;
 }
 
-/* Epics: any task whose category is literally named "epic" gets a
-   distinct card background + left accent, independent of its own
-   task color. Matches by category slug (.category-epic), not by
-   numeric category id, so it works the same on every project. */
-.task-board:has(.category-epic) {
-	background: #f1ebff;
-	border-left: 4px solid #8b5cf6;
-}
+/* Full-card tint driven by the category's own configured color, not by
+   category name — this used to be hardcoded to .category-epic only, so
+   every other category's card stayed plain white regardless of its
+   color (the pill showed the right color, the card itself never did).
+   Matches by the pill's .color-X class, same 16 colors as the pills
+   above, so a newly-created category gets this for free the moment a
+   color is picked for it. Background uses Kanboard's own pastel
+   --color-task-X-bg (built for exactly this: a light full-surface
+   tint, unlike the solid pill accent below). */
+.task-board:has(.task-board-category.color-yellow) { background: var(--color-task-yellow-bg); border-left: 4px solid #c9a227; }
+.task-board:has(.task-board-category.color-blue) { background: var(--color-task-blue-bg); border-left: 4px solid #1e88e5; }
+.task-board:has(.task-board-category.color-green) { background: var(--color-task-green-bg); border-left: 4px solid #43a047; }
+.task-board:has(.task-board-category.color-purple) { background: var(--color-task-purple-bg); border-left: 4px solid #8e24aa; }
+.task-board:has(.task-board-category.color-red) { background: var(--color-task-red-bg); border-left: 4px solid #e53935; }
+.task-board:has(.task-board-category.color-orange) { background: var(--color-task-orange-bg); border-left: 4px solid #fb8c00; }
+.task-board:has(.task-board-category.color-grey) { background: var(--color-task-grey-bg); border-left: 4px solid #78909c; }
+.task-board:has(.task-board-category.color-brown) { background: var(--color-task-brown-bg); border-left: 4px solid #6d4c41; }
+.task-board:has(.task-board-category.color-deep_orange) { background: var(--color-task-deep-orange-bg); border-left: 4px solid #f4511e; }
+.task-board:has(.task-board-category.color-dark_grey) { background: var(--color-task-dark-grey-bg); border-left: 4px solid #616161; }
+.task-board:has(.task-board-category.color-pink) { background: var(--color-task-pink-bg); border-left: 4px solid #ec407a; }
+.task-board:has(.task-board-category.color-teal) { background: var(--color-task-teal-bg); border-left: 4px solid #00897b; }
+.task-board:has(.task-board-category.color-cyan) { background: var(--color-task-cyan-bg); border-left: 4px solid #00acc1; }
+.task-board:has(.task-board-category.color-lime) { background: var(--color-task-lime-bg); border-left: 4px solid #7cb342; }
+.task-board:has(.task-board-category.color-light_green) { background: var(--color-task-light-green-bg); border-left: 4px solid #66bb6a; }
+.task-board:has(.task-board-category.color-amber) { background: var(--color-task-amber-bg); border-left: 4px solid #d19a00; }
