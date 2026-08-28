@@ -28,6 +28,22 @@
 .task-board a {
     color: var(--color-greyscale-1);
 }
+/* Same fix as the .task-board-title override further down: this more
+   generic rule is what actually governs a collapsed-column card's link
+   (different markup path than the expanded .task-board-title a), so it
+   needs the same brighter dark-mode color independently. */
+@media (prefers-color-scheme: dark) {
+	.task-board a {
+		color: #fff;
+	}
+	/* Collapsed-column cards show the assignee initial as a bare
+	   span[title="<name>"] (no wrapping .avatar-letter, no <a>), which
+	   inherits the same greyscale-1 default and fails the same way on a
+	   tinted card background. */
+	.task-board-collapsed span[title] {
+		color: #fff;
+	}
+}
 .draggable-placeholder {
     border: 1.5rem solid var(--color-greyscale-5);
     background-image: var(--pattern-dots-ph);
@@ -47,7 +63,12 @@
     right: 0;
     bottom: 0;
     top: 0;
-    color: var(--color-greyscale-6);
+    /* Bug: var(--color-greyscale-6) means "white" only by coincidence in
+       light scheme (it's the surface/background token, not a lightness
+       rank) -- in dark scheme it's a dark surface color instead, going
+       invisible on this dark overlay. Same root cause as the pill text
+       fix below; hardcode the actual intent. */
+    color: #fff;
     background-color: rgba(0,0,0,.6);
 }
 .task-board-expanded .task-board-saving-icon i.fa{
@@ -156,6 +177,16 @@ body.TR .task-board-title a, body.TR .table-list-title a {
 	color: var(--color-greyscale-1);
 	padding-right: 6px;
 }
+/* greyscale-1 (#ccc) is legible on the plain dark surface, but every
+   card now carries a category-color tint (or the no-category yellow
+   fallback) as its background -- several of those dark task-*-bg
+   values (yellow, grey, lime, pink) don't have enough contrast against
+   a mid grey. A brighter, near-white title works against all of them. */
+@media (prefers-color-scheme: dark) {
+	body.TR .task-board-title a, body.TR .table-list-title a {
+		color: #fff;
+	}
+}
 
 /* category & tags */
 .task-board .task-board-expanded > .task-board-category-container {
@@ -177,7 +208,7 @@ body.TR .task-board-title a, body.TR .table-list-title a {
     margin: 0 6px 6px 0 !important;
     font-weight: bold;
     font-size: var(--size-font-min);;
-	color: var(--color-greyscale-6);
+	color: #fff;
     background: none !important;
 	float: left;
 	opacity: .85;
@@ -199,7 +230,7 @@ body.TR .task-board-title a, body.TR .table-list-title a {
       !important above). Recolor border-bottom per color class.
    2. Kanboard's own --color-task-X-bg vars are pale pastel tints, meant
       to pair with dark text — but this pill design forces white text
-      (see `color: var(--color-greyscale-6)` above). Pastel + white text
+      (see `color: #fff` above). Pastel + white text
       is close to unreadable, so these use a hand-picked solid/saturated
       palette instead of the native pastel vars. Plain tags with no
       color at all (area:/type: labels never get a .color-X class in
@@ -225,14 +256,14 @@ body.TR .task-board-title a, body.TR .table-list-title a {
 	opacity: 1;
 }
 body.TR .task-board-category a, body.TR .table-list-category a{
-    color: var(--color-greyscale-6);
+    color: #fff;
 	font-size: var(--size-font-min);
     font-weight: bold;
 	line-height: calc(1rem + 6px);
 	display: contents;
 }
 body.TR .task-board-category a:hover, body.TR .table-list-category a:hover {
-    color: var(--color-greyscale-6);
+    color: #fff;
 }
 body.TR .task-board-category a {
 	/*display: block;*/
@@ -241,7 +272,7 @@ body.TR .task-board-category a {
 }
 body.TR .task-board-category span.tooltip i.fa, body.TR .table-list-category span.tooltip i.fa{
     margin: 0;
-    color: var(--color-greyscale-6);
+    color: #fff;
     vertical-align: middle;
     opacity: .5;
 }

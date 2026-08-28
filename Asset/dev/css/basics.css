@@ -81,6 +81,42 @@
     --button-disabled-background-color: var(--color-greyscale-3);
     --button-disabled-border-color: var(--color-greyscale-3);
 }
+/* Bug: --avatar-color-letter above reuses greyscale-6 to mean "white",
+   which only happens to be true in light scheme (greyscale-6 is the
+   surface/background token, not a fixed lightness) -- avatar background
+   colors are generated per-user independent of scheme, so in dark
+   scheme this goes dark-on-colored, same failure as the pill text fix
+   in board-task-list.css. */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--avatar-color-letter: #fff;
+	}
+}
+/* Bug: --color-info-cont's own dark-palette default (#d4d7ff) is still a
+   pale lavender, barely darker than its light value (#d9e7ff) -- an
+   upstream default that was never actually darkened. --alert-color-info
+   (greyscale-based text elsewhere in the box) then expects a dark
+   surface and goes near-invisible on it. Can't just darken
+   --color-info-cont itself: nothing else reuses it, but the equivalent
+   --color-warning-cont IS reused as --button-danger-color (light text on
+   a dark red button, which is fine) -- override the alert-specific
+   derived variable instead of the shared palette color, so nothing else
+   that reads the same palette token is affected. */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--alert-background-color-info: #1a2550;
+		/* Same bug, same fix, for the default/"reminder" alert (e.g. the
+		   "There is no global tag" notice): --color-reminder-cont's dark
+		   default (#ffe4be) is still pale. Darkening the background alone
+		   left --alert-color-default (--color-reminder-prim, #a46a01)
+		   under 3:1 against it -- override both derived alert variables
+		   instead of just the background. reminder-prim isn't reused
+		   anywhere else, so this is safe the same way the background one
+		   is. */
+		--alert-background-color-default: #241905;
+		--alert-color-default: #f0b030;
+	}
+}
 html,
 body {
 	font-size: var(--size-font-def);
@@ -92,6 +128,15 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	font-family: var(--style-fontfamily);
 	letter-spacing: var(--style-letterspacing);
+}
+/* The bright Trello blue reads fine in light mode but is glaring next to
+   the dark greyscale surfaces everywhere else once dark is active --
+   darken it to a deep navy that keeps the brand identity without
+   fighting the rest of the dark palette. */
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #0a3d62;
+	}
 }
 body.TR a {
 	font-size: 1rem;

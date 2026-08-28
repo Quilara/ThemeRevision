@@ -1,3 +1,14 @@
+/* The ModelContextProtocol plugin's own config textarea sets
+   background-color: #f5f5f5 inline (not a class we control), which
+   beats the scheme-aware rule below regardless of scheme -- fine in
+   light, invisible-ish text in dark. !important only inside the dark
+   media query, so light mode is untouched. */
+@media (prefers-color-scheme: dark) {
+	.form-control {
+		background-color: var(--color-greyscale-6) !important;
+		color: var(--color-greyscale-1) !important;
+	}
+}
 /*input select textarea*/
 input[type=date], input[type=email], input[type=number], input[type=password], input[type=text], input[type="text"]:not(.input-addon-field), input[type=checkbox], input[type=radio], input[type=file], textarea, select, form > select {
     border: none;
@@ -399,6 +410,25 @@ label {
 	margin: -.5rem 0 1rem;
 	font-size: .857rem;
 	color: var(--color-warning-prim);
+}
+/* --color-warning-prim's dark value (#b62500, a brick red) was picked
+   for warning borders/icons, not for body text on a dark surface --
+   low contrast there. Lighter amber for the same "this is a warning
+   hint" intent in dark scheme. */
+@media (prefers-color-scheme: dark) {
+	.form-help {
+		color: #fbbf24 !important;
+	}
+	/* The actual offender: ThemeRevision's own Mode-switch warning text is
+	   an inline-styled span (style="color:var(--color-warning-prim)"),
+	   not a .form-help element -- an inline style always wins over any
+	   external rule unless that rule is !important, hence targeting it
+	   by attribute-substring instead of trying to reach it through an
+	   ancestor selector (which only affects inheritance, not this
+	   element's own explicit style). */
+	span[style*="warning-prim"] {
+		color: #fbbf24 !important;
+	}
 }
 .form-actions {
 	padding: 0;

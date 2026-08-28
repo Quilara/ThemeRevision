@@ -6,6 +6,11 @@ header {
 	align-items: flex-end;
 	color: #fff;
 }
+@media (prefers-color-scheme: dark) {
+	header {
+		background: #0a3d62;
+	}
+}
 header a, header h1, header .notification i.fa, header i.fa {
 	color: #fff !important;
 	text-shadow: none !important;
@@ -43,6 +48,11 @@ header .tooltip i.fa {
 	border-radius: var(--size-radius-def);
 	min-height: calc(100vh - 12rem);
 	overflow-x:inherit
+}
+@media (prefers-color-scheme: dark) {
+	#board-container {
+		background: #0a3d62;
+	}
 }
 .sidebar-container{
 	/*max-width: calc(var(--size-width-def) + var(--size-width-comp) + 4rem);*/
