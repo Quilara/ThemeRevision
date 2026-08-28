@@ -290,3 +290,12 @@ body.TR .task-board-category span.tooltip i.fa, body.TR .table-list-category spa
 	border-bottom-right-radius: var(--size-radius-def);
 	margin: 0;
 }
+
+/* Epics: any task whose category is literally named "epic" gets a
+   distinct card background + left accent, independent of its own
+   task color. Matches by category slug (.category-epic), not by
+   numeric category id, so it works the same on every project. */
+.task-board:has(.category-epic) {
+	background: #f1ebff;
+	border-left: 4px solid #8b5cf6;
+}
