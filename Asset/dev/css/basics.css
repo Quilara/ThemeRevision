@@ -36,7 +36,12 @@
 	--alert-background-color-info: var(--color-info-cont);
 	/*--alert-border-color-info: var(--color-info-secd);*/
 
-	--alert-color-default: var(--color-reminder-prim);
+	/* Bug: --color-reminder-prim (#be7b04) on --color-reminder-cont
+	   (#ffed9d) is 2.96:1 in light scheme too, already below WCAG AA
+	   (4.5:1) before dark mode touched anything -- darken the alert's own
+	   text color, independent of scheme. reminder-prim isn't reused
+	   elsewhere so this doesn't affect anything else. */
+	--alert-color-default: #6b4a00;
 	--alert-background-color-default: var(--color-reminder-cont);
 	/*--alert-border-color-default: var(--color-reminder-secd);*/
 

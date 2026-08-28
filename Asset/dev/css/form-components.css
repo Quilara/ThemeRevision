@@ -411,6 +411,24 @@ label {
 	font-size: .857rem;
 	color: var(--color-warning-prim);
 }
+/* --color-warning-prim's LIGHT value (#d9371c) is already only 4.18:1 on
+   a plain white field -- under WCAG AA (4.5:1) before dark mode touched
+   anything. Darken it for these two text uses specifically (not the
+   shared variable, which is also used for borders/buttons where the
+   lighter red is fine). */
+.form-help {
+	color: #b8290f;
+}
+/* The actual offender for the Mode-switch warning text: it's an inline-
+   styled span (style="color:var(--color-warning-prim)"), not a
+   .form-help element -- an inline style always wins over any external
+   rule unless that rule is !important, hence targeting it by
+   attribute-substring instead of trying to reach it through an ancestor
+   selector (which only affects inheritance, not this element's own
+   explicit style). */
+span[style*="warning-prim"] {
+	color: #b8290f !important;
+}
 /* --color-warning-prim's dark value (#b62500, a brick red) was picked
    for warning borders/icons, not for body text on a dark surface --
    low contrast there. Lighter amber for the same "this is a warning
@@ -419,13 +437,6 @@ label {
 	.form-help {
 		color: #fbbf24 !important;
 	}
-	/* The actual offender: ThemeRevision's own Mode-switch warning text is
-	   an inline-styled span (style="color:var(--color-warning-prim)"),
-	   not a .form-help element -- an inline style always wins over any
-	   external rule unless that rule is !important, hence targeting it
-	   by attribute-substring instead of trying to reach it through an
-	   ancestor selector (which only affects inheritance, not this
-	   element's own explicit style). */
 	span[style*="warning-prim"] {
 		color: #fbbf24 !important;
 	}
